@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Patrick+Hand&display=swap');
+
+:root {
+  --bg-pink: #fff0f5;
+  --bg-accent: #ffe4e1;
+  --primary: #ff6b81;
+  --primary-hover: #ff4757;
+  --text-dark: #2f3542;
+  --text-soft: #57606f;
+  --white: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Fredoka', sans-serif;
+  color: var(--text-dark);
+  background-color: var(--bg-pink);
+  overflow-x: hidden;
+}
+
+/* --- LAYOUT & BACKGROUNDS --- */
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-size: cover;
+  background-position: center;
+}
+
+/* You can add real background images here if you want */
+.landing-bg { background-image: radial-gradient(#ffe4e1 10%, var(--bg-pink) 10%); background-size: 30px 30px; }
+.rules-bg { background-color: #f8efff; }
+.game-bg { background-color: #f3f8ff; }
+.final-bg { background-image: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%); }
+
+/* --- CARD DESIGN --- */
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  border: 4px solid white;
+}
+
+/* --- TYPOGRAPHY --- */
+h1 { font-family: 'Patrick Hand', cursive; font-size: 3rem; color: var(--primary); margin: 0 0 10px 0; line-height: 1.1; }
+h2 { font-size: 1.8rem; color: var(--text-dark); margin-bottom: 20px; }
+p { font-size: 1.2rem; color: var(--text-soft); line-height: 1.6; }
+
+/* --- BUTTONS --- */
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 5px 15px rgba(255, 107, 129, 0.4);
+}
+
+.btn-primary:hover { transform: translateY(-3px); background: var(--primary-hover); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-soft);
+  border: 2px solid #ccc;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-top: 20px;
+  display: flex; align-items: center; justify-content: center; gap: 8px; margin: 20px auto 0;
+}
+
+/* --- RULES LIST --- */
+.rules-list { text-align: left; list-style: none; padding: 0; }
+.rules-list li { margin-bottom: 15px; font-size: 1.1rem; background: #fff; padding: 10px; border-radius: 10px; border-left: 4px solid var(--primary); }
+
+/* --- GAME UI --- */
+.level-badge {
+  display: inline-block;
+  background: #e1f0ff;
+  color: #0984e3;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.options-grid { display: grid; gap: 10px; }
+.btn-option {
+  background: white;
+  border: 2px solid #eee;
+  padding: 15px;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  color: var(--text-dark);
+}
+.btn-option:hover { border-color: var(--primary); color: var(--primary); background: #fff0f5; }
+
+.input-group { display: flex; gap: 10px; margin-top: 20px; }
+input {
+  flex: 1;
+  padding: 15px;
+  border-radius: 15px;
+  border: 2px solid #ddd;
+  font-size: 1.1rem;
+  font-family: inherit;
+  outline: none;
+}
+input:focus { border-color: var(--primary); }
+.btn-submit {
+  background: var(--primary);
+  color: white;
+  border: none;
+  width: 50px;
+  border-radius: 15px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.hint-box {
+  background: #fff3cd;
+  color: #856404;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+
+/* --- REWARD SCREEN --- */
+.media-frame {
+  width: 100%;
+  border-radius: 20px;
+  border: 5px solid white;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+  max-height: 300px;
+  object-fit: cover;
+}
+.caption-text { font-family: 'Patrick Hand', cursive; font-size: 1.5rem; color: var(--primary); margin-bottom: 10px; }
+
+/* --- FINAL PAGE --- */
+.heart-icon { animation: heartbeat 1.5s infinite; margin-bottom: 10px; }
+.letter-body { background: #fffbe6; padding: 20px; border-radius: 15px; transform: rotate(-1deg); box-shadow: 0 5px 10px rgba(0,0,0,0.05); margin-top: 20px; }
+
+/* --- ANIMATIONS --- */
+.fade-in { animation: fadeIn 1s ease; }
+.slide-up { animation: slideUp 0.5s ease; }
+.zoom-in { animation: zoomIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.shake { animation: shake 0.5s; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
