@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Confetti from 'react-confetti';
-import { ArrowRight, HelpCircle, Heart, RotateCcw, CheckCircle } from 'lucide-react';
+import { ArrowRight, HelpCircle, Heart, RotateCcw, CheckCircle, X, PlayCircle } from 'lucide-react';
 import './App.css';
 
 /* --- 🗺️ THE TREASURE HUNT DATA --- */
@@ -52,12 +52,25 @@ const levels = [
   },
 ];
 
+/* --- 📸 YOUR MEMORIES (Add your URLs here) --- */
+const memories = [
+  { type: 'image', src: 'https://placehold.co/400x300/ff9ff3/white?text=Memory+1', caption: "First Trip!" },
+  { type: 'image', src: 'https://placehold.co/300x400/feca57/white?text=School+Days', caption: "Class Bunk" },
+  { type: 'video', src: 'https://www.w3schools.com/html/mov_bbb.mp4', caption: "Funny Dance" },
+  { type: 'image', src: 'https://placehold.co/400x400/54a0ff/white?text=Crazy+Selfie', caption: "Lol" },
+  { type: 'image', src: 'https://placehold.co/300x500/5f27cd/white?text=Graduation', caption: "We made it" },
+  { type: 'video', src: 'https://www.w3schools.com/html/movie.mp4', caption: "Birthday 2023" },
+];
+
 export default function App() {
   const [page, setPage] = useState('landing'); // landing, rules, game, final
   const [currentLevel, setCurrentLevel] = useState(0);
   const [isWrong, setIsWrong] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false); // New state for smooth transition
+  const [isTransitioning, setIsTransitioning] = useState(false); 
   const [inputVal, setInputVal] = useState('');
+  
+  // New State for Gallery Lightbox
+  const [selectedMedia, setSelectedMedia] = useState(null);
   
   const level = levels[currentLevel];
 
@@ -67,7 +80,7 @@ export default function App() {
   const handleBeginHunt = () => setPage('game');
 
   const checkAnswer = (answer) => {
-    if (isTransitioning) return; // Prevent double clicking
+    if (isTransitioning) return; 
 
     let isCorrect = false;
 
@@ -81,9 +94,8 @@ export default function App() {
 
     if (isCorrect) {
       setIsWrong(false);
-      setIsTransitioning(true); // Trigger transition animation
+      setIsTransitioning(true); 
       
-      // Wait 1.5 seconds before moving to next question so she sees she got it right
       setTimeout(() => {
         nextLevel();
       }, 1500);
@@ -110,6 +122,7 @@ export default function App() {
     setCurrentLevel(0);
     setIsTransitioning(false);
     setInputVal('');
+    setSelectedMedia(null);
   };
 
   /* --- RENDERERS --- */
@@ -145,10 +158,9 @@ export default function App() {
     </div>
   );
 
-  // 3. GAME PLAY (Continuous Questions)
+  // 3. GAME PLAY 
   if (page === 'game') return (
     <div className="container game-bg">
-      {/* Show confetti briefly during transition */}
       {isTransitioning && <Confetti recycle={false} numberOfPieces={200} gravity={0.3} />}
       
       <div className={`card ${isTransitioning ? 'fade-out' : 'slide-up'}`}>
@@ -203,24 +215,60 @@ export default function App() {
     </div>
   );
 
-  // 4. FINAL SURPRISE PAGE
+  // 4. FINAL SURPRISE PAGE (Updated with Gallery)
   if (page === 'final') return (
-    <div className="container final-bg">
+    <div className="container final-bg final-layout">
       <Confetti recycle={true} numberOfPieces={100} />
-      <div className="card fade-in">
+      
+      {/* Top Message Card */}
+      <div className="card fade-in final-card-header">
         <div className="heart-icon"><Heart fill="#ff4d6d" color="#ff4d6d" size={50} /></div>
         <h1>Happy Birthday, Aahuti! 💖</h1>
         <div className="letter-body">
           <p>You answered everything correctly!</p>
           <p>You’re weird, annoying, kind, clueless, strong and deeply loved.</p>
-          <p>Never change. ✨</p>
+          <p>Here are some of our best memories 👇</p>
         </div>
-        {/* You can add a final group photo here if you want */}
-        {/* <img src="URL_HERE" className="final-photo" /> */}
         <button className="btn-secondary" onClick={restart}>
           <RotateCcw size={16} /> Replay
         </button>
       </div>
+
+      {/* 📸 Memory Gallery Section */}
+      <div className="gallery-grid fade-in-delayed">
+        {memories.map((item, index) => (
+          <div key={index} className="gallery-item" onClick={() => setSelectedMedia(item)}>
+            {item.type === 'video' ? (
+               <div className="video-thumbnail">
+                 <PlayCircle size={40} color="white" className="play-icon" />
+                 <video src={item.src} className="thumb-media" muted />
+               </div>
+            ) : (
+              <img src={item.src} alt="memory" className="thumb-media" />
+            )}
+            <div className="hover-caption">{item.caption}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* 🕶️ Lightbox Overlay (Full Screen View) */}
+      {selectedMedia && (
+        <div className="lightbox-overlay" onClick={() => setSelectedMedia(null)}>
+          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <button className="close-btn" onClick={() => setSelectedMedia(null)}>
+              <X size={30} />
+            </button>
+            
+            {selectedMedia.type === 'video' ? (
+              <video src={selectedMedia.src} controls autoPlay className="full-media" />
+            ) : (
+              <img src={selectedMedia.src} alt="Full memory" className="full-media" />
+            )}
+            <p className="lightbox-caption">{selectedMedia.caption}</p>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
