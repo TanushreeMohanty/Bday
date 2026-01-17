@@ -2,7 +2,21 @@ import React, { useState } from 'react';
 import Confetti from 'react-confetti';
 import { ArrowRight, HelpCircle, Heart, RotateCcw, CheckCircle, X, PlayCircle } from 'lucide-react';
 import './App.css';
-
+import img1 from './assets/img1.jpg';
+import img2 from './assets/img2.jpg';
+import img3 from './assets/img3.jpg';
+import img4 from './assets/img4.jpg';
+import img5 from './assets/img5.jpg';
+import img6 from './assets/img6.jpg';
+import img7 from './assets/img7.jpg';
+import img8 from './assets/img8.jpg';
+import img9 from './assets/img9.jpg';
+import img10 from './assets/img10.jpg';
+import img11 from './assets/img11.jpg';
+import img12 from './assets/img12.jpg';
+import img13 from './assets/img13.jpg';
+import img14 from './assets/img14.jpg';
+import img15 from './assets/img15.jpg';
 /* --- 🗺️ THE TREASURE HUNT DATA --- */
 const levels = [
   {
@@ -54,12 +68,21 @@ const levels = [
 
 /* --- 📸 YOUR MEMORIES (Add your URLs here) --- */
 const memories = [
-  { type: 'image', src: 'https://placehold.co/400x300/ff9ff3/white?text=Memory+1', caption: "First Trip!" },
-  { type: 'image', src: 'https://placehold.co/300x400/feca57/white?text=School+Days', caption: "Class Bunk" },
-  { type: 'video', src: 'https://www.w3schools.com/html/mov_bbb.mp4', caption: "Funny Dance" },
-  { type: 'image', src: 'https://placehold.co/400x400/54a0ff/white?text=Crazy+Selfie', caption: "Lol" },
-  { type: 'image', src: 'https://placehold.co/300x500/5f27cd/white?text=Graduation', caption: "We made it" },
-  { type: 'video', src: 'https://www.w3schools.com/html/movie.mp4', caption: "Birthday 2023" },
+  { type: 'image', src: img1, caption: "1" },
+    { type: 'image', src: img2, caption: "2" },
+  { type: 'image', src: img3, caption: "3" },
+  { type: 'image', src: img4, caption: "4" },
+  { type: 'image', src: img5, caption: "5" },
+  { type: 'image', src: img6, caption: "6" },
+  { type: 'image', src: img7, caption: "7" },
+  { type: 'image', src: img8, caption: "8" },
+  { type: 'image', src: img9, caption: "9" },
+  { type: 'image', src: img10, caption: "10" },
+  { type: 'image', src: img11, caption: "11" },
+  { type: 'image', src: img12, caption: "12" },
+  { type: 'image', src: img13, caption: "13" },
+  { type: 'image', src: img14, caption: "14" },
+  { type: 'image', src: img15, caption: "15" },
 ];
 
 export default function App() {
